@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fffbeb;
+}
+
 .landing-page {
   height: 100vh;
   width: 100vw;
@@ -61,6 +71,16 @@
   object-fit: cover;
 }
 
-body {
-  background-color: #fffbeb;
+.NotFoundPage img {
+  width: 100vw;
+  height: 85vh;
+}
+.NotFoundPage a {
+  text-align: center;
+  display: block;
+  font-size: 2rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #dba39a;
+  font-family: "Amatic SC", cursive;
 }
