@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+.landing-page {
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  display: flex;
+  font-family: "Lato", sans-serif;
+}
+.landing-page .landing-page-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 1200px;
+}
+.landing-page .landing-page-content .landing-page-content-text {
+  margin-right: 2rem;
+  width: 50%;
+}
+.landing-page .landing-page-content .landing-page-content-text h3 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  color: #424d58;
+  font-weight: 900;
+}
+.landing-page .landing-page-content .landing-page-content-text h3 span {
+  color: #68b984;
+}
+.landing-page .landing-page-content .landing-page-content-text p {
+  color: #596877;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.5px;
+}
+.landing-page .landing-page-content .landing-page-content-text button {
+  margin-top: 1rem;
+  background-color: #68b984;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.landing-page .landing-page-content .landing-page-content-text button:hover {
+  background-color: #68b984;
+  color: #fff;
+  transform: scale(1.1);
+}
+.landing-page .landing-page-content .landing-page-content-img {
+  width: 50%;
+}
+.landing-page .landing-page-content .landing-page-content-img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.NotFoundPage img {
+  width: 100vw;
+  height: 85vh;
+}
+.NotFoundPage a {
+  text-align: center;
+  display: block;
+  font-size: 2rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: #dba39a;
+  font-family: "Amatic SC", cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fffbeb;
+}
