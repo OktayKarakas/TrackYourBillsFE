@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import RegisterModal from './RegisterModal'
+import LoginModal from './LoginModal'
 
 const LandingPage = () => {
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(Boolean)
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(Boolean)
+  const [isWantLogin, setIsWantLogin] = useState(Boolean)
   return (
     <div className="landing-page">
       <div className="landing-page-content">
@@ -17,12 +22,36 @@ const LandingPage = () => {
             malesuada. Proin gravida dui id eleifend congue. Nulla in tincidunt
             quam.
           </p>
-          <button>Login/Register</button>
+          <button onClick={() => setIsRegisterModalOpen(true)}>
+            Login/Register
+          </button>
         </div>
         <div className="landing-page-content-img">
           <img src="/assets/landingPageImage.svg" />
         </div>
       </div>
+      <RegisterModal
+        onClose={() => {
+          setIsRegisterModalOpen(false)
+          return isRegisterModalOpen
+        }}
+        isOpened={isRegisterModalOpen}
+        isWantLogin={() => {
+          setIsLoginModalOpen(true)
+          setIsRegisterModalOpen(false)
+        }}
+      />
+      <LoginModal
+        onClose={() => {
+          setIsLoginModalOpen(false)
+          return isLoginModalOpen
+        }}
+        isOpened={isLoginModalOpen}
+        isWantRegister={() => {
+          setIsRegisterModalOpen(true)
+          setIsLoginModalOpen(false)
+        }}
+      />
     </div>
   )
 }
