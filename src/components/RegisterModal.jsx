@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { Modal, Input, Space, Button } from 'antd'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../features/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = {
   name: '',
@@ -13,6 +14,7 @@ const initialState = {
 }
 
 const RegisterModal = ({ onClose, isOpened, isWantLogin }) => {
+  const navigate = useNavigate()
   const { isLoading, user } = useSelector((state) => state.user)
   const [passwordVisible, setPasswordVisible] = React.useState(false)
   const [values, setValues] = useState(initialState)
@@ -37,6 +39,13 @@ const RegisterModal = ({ onClose, isOpened, isWantLogin }) => {
 
     dispatch(registerUser({ name, email, password }))
   }
+
+  useEffect(() => {
+    if (user) {
+      onClose()
+      navigate('/home')
+    }
+  }, [user])
   return (
     <>
       <Modal

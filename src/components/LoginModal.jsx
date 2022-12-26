@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../features/userSlice'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const initialState = {
   name: '',
@@ -14,6 +15,7 @@ const initialState = {
 }
 
 const LoginModal = ({ onClose, isOpened, isWantRegister }) => {
+  const navigate = useNavigate()
   const { isLoading, user } = useSelector((state) => state.user)
   const [confirmLoading, setConfirmLoading] = useState(isLoading)
   const [passwordVisible, setPasswordVisible] = React.useState(false)
@@ -30,6 +32,13 @@ const LoginModal = ({ onClose, isOpened, isWantRegister }) => {
       }
     })
   }
+
+  useEffect(() => {
+    if (user) {
+      onClose()
+      navigate('/home')
+    }
+  }, [user])
 
   useEffect(() => {
     setConfirmLoading(isLoading)
