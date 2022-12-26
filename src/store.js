@@ -8,3 +8,5 @@ export default configureStore({
     sidebar: sideBarReducer,
   },
 })
+
+export default configureStore({ reducer: { user: userReducer } })
