@@ -15,38 +15,47 @@ import {
   AddBill,
   SharedLayout,
 } from './components/dashboard'
+import ProtectedRouter from './components/dashboard/ProtectRouter'
 
 const router = createBrowserRouter([
   {
     path: '/stats',
     element: (
-      <SharedLayout>
-        <Stats />
-      </SharedLayout>
+      <ProtectedRouter>
+        <SharedLayout>
+          <Stats />
+        </SharedLayout>
+      </ProtectedRouter>
     ),
   },
   {
     path: '/profile',
     element: (
-      <SharedLayout>
-        <Profile />
-      </SharedLayout>
+      <ProtectedRouter>
+        <SharedLayout>
+          <Profile />
+        </SharedLayout>
+      </ProtectedRouter>
     ),
   },
   {
     path: '/allbills',
     element: (
-      <SharedLayout>
-        <AllBills />
-      </SharedLayout>
+      <ProtectedRouter>
+        <SharedLayout>
+          <AllBills />
+        </SharedLayout>
+      </ProtectedRouter>
     ),
   },
   {
     path: '/addbill',
     element: (
-      <SharedLayout>
-        <AddBill />
-      </SharedLayout>
+      <ProtectedRouter>
+        <SharedLayout>
+          <AddBill />
+        </SharedLayout>
+      </ProtectedRouter>
     ),
   },
   {

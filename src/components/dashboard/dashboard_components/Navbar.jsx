@@ -2,9 +2,13 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleSideBar } from '../../../features/sideBarSlice'
+import { logoutUser } from '../../../features/userSlice'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Navbar = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const { user } = useSelector((state) => state.user)
   const { isOpen } = useSelector((state) => state.sidebar)
   const dispatch = useDispatch()
@@ -46,7 +50,15 @@ const Navbar = () => {
 
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <button className="dropdown-item">Sign Out</button>
+                <button
+                  className="dropdown-item"
+                  onClick={() => {
+                    dispatch(logoutUser())
+                    navigate('/')
+                  }}
+                >
+                  Sign Out
+                </button>
               </li>
             </ul>
           </div>
