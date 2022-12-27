@@ -6,6 +6,7 @@ import {
   addUserToLocalStorage,
   deleteUserFromLocalStorage,
   getUserFromLocalStorage,
+  updateUserFormLocalStorage,
 } from '../utils/localStorage'
 
 const initialState = {
@@ -29,6 +30,17 @@ export const loginUser = createAsyncThunk(
   },
 )
 
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (user, thunkAPI) => {
+    const resp = await customFetch.patch('/api/v1/auth/updateUser', user, {
+      headers: {
+        Authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+      },
+    })
+    return resp.data.data
+  },
+)
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -68,6 +80,27 @@ const userSlice = createSlice({
     builder.addCase(loginUser.rejected, (state, action) => {
       state.isLoading = false
       toast.error('Error. Please try again later.')
+    })
+    builder.addCase(updateUser.pending, (state, action) => {
+      toast('Pending..')
+    })
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      const { payload } = action
+      const token = state.user.token
+      state.user = payload
+      state.user.token = token
+      payload.token = token
+      updateUserFormLocalStorage(payload)
+      toast('User updated successfully.')
+    })
+    builder.addCase(updateUser.rejected, (state, action) => {
+      if (action.error.code === 'ERR_BAD_REQUEST') {
+        toast.error('Please login again.')
+        state.user = null
+        deleteUserFromLocalStorage()
+      } else {
+        toast.error('Error. Please try again later.')
+      }
     })
   },
 })
