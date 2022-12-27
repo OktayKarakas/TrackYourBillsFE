@@ -43,7 +43,7 @@ const RegisterModal = ({ onClose, isOpened, isWantLogin }) => {
   useEffect(() => {
     if (user) {
       onClose()
-      navigate('/home')
+      navigate('/stats')
     }
   }, [user])
   return (

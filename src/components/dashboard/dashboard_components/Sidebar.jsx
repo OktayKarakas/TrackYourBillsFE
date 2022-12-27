@@ -5,22 +5,44 @@ import { Link } from 'react-router-dom'
 const Sidebar = () => {
   const { isOpen } = useSelector((state) => state.sidebar)
   const [isSideBarOpen, setIsSidebarOpen] = useState()
+  const [isSideBarFixed, setIsSidebarFixed] = useState(false)
+  const [isSideBarItemsCentered, setIsSidebarItemsCentered] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
   useEffect(() => {
-    if (isOpen) {
+    window.addEventListener('resize', function () {
+      setWindowWidth(window.innerWidth)
+    })
+    if (windowWidth < 1025 && isOpen) {
+      setIsSidebarOpen('100vw')
+      setIsSidebarFixed('fixed')
+      setIsSidebarItemsCentered(true)
+    } else if (isOpen && windowWidth > 1025) {
       setIsSidebarOpen('11rem')
+      setIsSidebarFixed('block')
+      setIsSidebarItemsCentered(false)
     } else {
       setIsSidebarOpen('0px')
     }
-  }, [isOpen])
+  }, [isOpen, windowWidth])
+
   return (
-    <div style={{ width: isSideBarOpen }}>
+    <div
+      style={{
+        width: isSideBarOpen,
+        position: isSideBarFixed,
+        zIndex: '1',
+      }}
+      className="sidebar-main-div"
+    >
       <nav
         class="navbar bg-body-tertiary align-items-center flex-column"
         style={{
           backgroundColor: '#F4EAD5',
-          width: isOpen ? '11rem' : '0px',
+          width: isSideBarOpen,
           height: '100vh',
           transition: 'all 0.1s ease-in-out',
+          position: isSideBarFixed,
         }}
       >
         <div
@@ -31,6 +53,9 @@ const Sidebar = () => {
             transition: 'all 0.1s ease-in-out',
             transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
             width: isOpen ? '100%' : 'none',
+            display: 'flex',
+            justifyContent: 'center',
+            marginLeft: isSideBarItemsCentered ? '-1rem' : 'none',
           }}
         >
           <ul className="sidebar-ul" style={{ color: '#424d58' }}>

@@ -36,7 +36,7 @@ const LoginModal = ({ onClose, isOpened, isWantRegister }) => {
   useEffect(() => {
     if (user) {
       onClose()
-      navigate('/home')
+      navigate('/stats')
     }
   }, [user])
 

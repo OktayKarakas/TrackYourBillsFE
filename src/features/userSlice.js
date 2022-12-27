@@ -16,32 +16,29 @@ const initialState = {
 export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (user, thunkAPI) => {
-    try {
-      const resp = await customFetch.post('/api/v1/auth/register', user)
-      return resp.data
-    } catch (error) {
-      console.log(error)
-      toast.error('Error. Please try again later.')
-    }
+    const resp = await customFetch.post('/api/v1/auth/register', user)
+    return resp.data
   },
 )
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user, thunkAPI) => {
-    try {
-      const resp = await customFetch.post('/api/v1/auth/login', user)
-      return resp.data
-    } catch (error) {
-      console.log(error)
-      toast.error('Error. Please try again later.')
-    }
+    const resp = await customFetch.post('/api/v1/auth/login', user)
+    return resp.data
   },
 )
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
+  reducers: {
+    logoutUser: (state, action) => {
+      state.user = null
+      deleteUserFromLocalStorage()
+      toast('You have been logged out.')
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state, action) => {
       state.isLoading = true
@@ -75,4 +72,5 @@ const userSlice = createSlice({
   },
 })
 
+export const { logoutUser } = userSlice.actions
 export default userSlice.reducer
